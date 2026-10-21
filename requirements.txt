@@ -1,0 +1,10 @@
+# Intentionally outdated pins with known CVEs - for Dependabot alerts / SCA demo
+Flask==0.12.2
+Werkzeug==0.14.1
+Jinja2==2.10
+PyYAML==5.3
+requests==2.19.0
+urllib3==1.24.1
+PyJWT==1.7.1
+pycryptodome==3.9.0
+stripe==2.0.0

@@ -16,36 +16,26 @@ jobs:
     permissions:
       actions: read
       contents: read
-      security-events: write # Required for SARIF upload
+      security-events: write   # required to upload results
 
     strategy:
       fail-fast: false
       matrix:
-        language: ["javascript", "python"]
-        # Supported: 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby', 'swift'
+        language: ["python"]
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
-          # Optional: Custom queries
-          # queries: security-extended,security-and-quality
-
-      # Autobuild for compiled languages (C/C++, C#, Java)
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v2
-
-      # Alternative: Manual build steps for complex projects
-      # - name: Build project
-      #   run: |
-      #     make bootstrap
-      #     make release
+          queries: security-extended
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3
         with:
           category: "/language:${{ matrix.language }}"
+
+
